@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>CheckSenha+ - Teste a força da sua senha</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/password-checker.css">
+</head>
+<body>
+    <header id="topo">
+        <nav class="navbar navbar-expand-sm navbar-light">
+            <a href="index.html" class="navbar-brand logo-checksenha">
+                <i class="fa-solid fa-shield-halved"></i> CheckSenha<span class="mais">+</span>
+            </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-target">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav-target">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link link ativo" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link" href="Quem-Somos.html">Sobre o Projeto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link mr-5" href="contatos.html">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section id="banner1" class="py-5 text-center text-white">
+        <div class="container">
+            <h1 class="display-4 font-weight-bold">Sua senha é forte o suficiente?</h1>
+            <p class="lead">Descubra em segundos o nível de segurança da sua senha, quanto tempo levaria para quebrá-la, e como torná-la mais forte.</p>
+        </div>
+    </section>
+
+    <section id="checador" class="pb-5">
+        <div class="container">
+            <div class="card p-4 mx-auto" style="max-width: 600px;">
+
+                <label for="inputSenha" class="form-label font-weight-bold">Digite sua senha para análise</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="inputSenha" placeholder="Digite aqui...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="btnMostrarSenha">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary w-100" id="btnAnalisar">Analisar senha</button>
+
+                <p class="text-muted small mt-2 mb-0">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Sua senha não é armazenada em nenhum momento — a análise acontece só na hora.
+                </p>
+
+                <div id="resultado" class="mt-4" style="display:none;">
+                    <hr>
+
+                    <div class="mb-2">
+                        <strong>Classificação:</strong>
+                        <span id="resClassificacao"></span>
+                    </div>
+
+                    <div class="progress mb-3" style="height: 20px;">
+                        <div id="barraForca" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+                    </div>
+
+                    <div class="mb-2">
+                        <strong>Tempo estimado para quebrar:</strong>
+                        <span id="resTempo"></span>
+                    </div>
+
+                    <div class="mb-2" id="blocoComprometida" style="display:none;">
+                        <span class="badge badge-danger">⚠️ Essa senha já apareceu em vazamentos conhecidos!</span>
+                    </div>
+
+                    <div class="mb-2" id="blocoPadroes" style="display:none;">
+                        <strong>Padrões detectados:</strong>
+                        <ul id="listaPadroes"></ul>
+                    </div>
+
+                    <div>
+                        <strong>Sugestões de melhoria:</strong>
+                        <ul id="listaMelhorias"></ul>
+                    </div>
+                </div>
+
+                <div id="erroMsg" class="alert alert-danger mt-3" style="display:none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="mt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-light">
+                    <p>Projeto acadêmico de análise de força de senhas, desenvolvido para fins educacionais sobre segurança da informação.</p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-uppercase text-light">Sobre</h5>
+                    <p class="text-light">Projeto acadêmico desenvolvido durante as férias universitárias.</p>
+                </div>
+            </div>
+            <hr class="border-light">
+            <div class="text-center text-light">
+                <p class="mb-0">&copy; 2026 CheckSenha+. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script/script.js"></script>
+    <script src="script/passwordChecker.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

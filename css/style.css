@@ -1,0 +1,939 @@
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+button{
+    outline: none;
+    cursor: pointer;
+}
+button:focus , input:focus, select:focus{
+    outline: none;
+}
+*{
+    box-sizing: border-box;
+}
+#dados-pessoais,
+#consultas,
+#exames,
+#historico {
+  scroll-margin-top: 160px; 
+  opacity: 0.2;
+  transition: 0.4s ease;
+}
+img, input, button, select{
+            outline: none;
+        }
+        #topo{
+            opacity: 0;
+            transition: 0.5s ease;
+        }
+        .verde{
+            background-color: #024959;
+            color: white;
+        }
+
+        .botao-paciente{
+            background-color: steelblue;
+            border: 1px solid steelblue;
+            transition: 0.3s;
+        }
+        #footer{
+            padding: 50px;
+            background: steelblue;
+        }
+
+        .botao-paciente:hover{
+            background-color: white;
+            border: 1px solid #024959;
+            color: #024959;
+        }
+        .card{
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 2px black;
+        }
+
+        .card:hover{
+            transform: scale(1.04);
+        }
+
+        
+
+        #controle{
+            background-color: #024959;
+        }
+
+        #atendimento-sessao{
+            padding: 50px;
+            margin: 50px 0;
+            background-color: #a3cad3;
+            box-shadow: 0 0 10px #024959;
+        }
+
+        #atendimento-sessao i{
+            color: #024959;
+        }
+
+        .verde-texto{
+            color: #024959;
+        }
+
+        .card-agendamento{
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 2px black;
+        }
+
+        #agendamento input, select{
+            padding: 10px;
+        }
+        #agendamento .cpf, .data{
+            width: 100%;
+        }
+        #agendamento .data input{
+            width: 100%;
+        }
+
+        .botan-buscar-horario{
+            margin: 10px 0;
+        }
+        #quem-somos img{
+            box-shadow: 0 0 5px black;
+            border-radius: 5px
+        }
+
+        .quem-somos{
+            margin: 50px 0;
+        }
+
+        .subbanner{
+            background-color: #f6f6f6;
+            border-radius: 5px;
+            box-shadow: 0 0 1px black;
+            padding: 15px;
+        }
+        
+        #banner2{
+            margin-top: 10px;
+            background-color: #f6f6f6;
+        }
+        #slides{
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            scroll-snap-type: x mandatory;
+            padding: 10px 16px;
+            box-sizing: border-box;
+            width: 100%;
+            margin: 0;
+        }
+        #slides .card-2:first-child{
+            margin-left: 0;
+        }
+        .slider-servicos::-webkit-scrollbar {
+            display: none;
+        }
+        .subbanner button{
+            padding: 6px;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #f6f6f6;
+            color: #024959;
+            border: 1px solid #024959;
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .subbanner button:hover{
+            box-shadow: 0 0 5px #024959;
+        }
+        .card-2{
+            min-width: 200px;
+            max-width: 200px;
+            box-sizing: border-box;
+            background-color: #f6f6f6;
+            color: steelblue;
+            box-shadow: 0 0 10px steelblue;
+            display: flex;
+            padding: 15px;
+            gap: 10px;
+            transition: ease 0.3s;
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+        .card-2:hover{
+            background-color: steelblue;
+            color: white;
+            box-shadow: 0 0 2px black;
+        }
+        .card2-b{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .botao-especialidades{
+            background-color: steelblue;
+            border: 1px solid steelblue;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .botao-especialidades:hover{
+            background-color: white;
+            color: steelblue;
+            border: 1px solid steelblue;
+            transform: scale(1.05);}
+            
+            .sem-linha {
+                text-decoration: none;
+            }
+
+        #saude-controle-qualidade{
+        background-color: #f6f6f6;
+        padding: 50px 0;
+    }
+    .card-scq{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        text-align: center;
+        min-width: 200px;
+        max-width: 350px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        padding: 50px;
+        margin: 1px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        transition: 0.3s ease, box-shadow 0.3s ease;
+    }
+    .quadrado{
+        display: flex;
+        flex-direction: column;
+    }
+    .quadrado h3{
+        height: 70px;
+    }
+    .quadrado p{
+        height: 70px;
+    }
+
+    .card-scq:hover{
+        transform: translateY(-8px);
+        box-shadow: 0px 8px 10px rgba(0,0,0,0.15);
+    }
+    .card-scq img{
+        box-shadow: 0 0 5px black;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .card-scq p{
+    }
+    #unidades{
+        background-color: #f6f6f6;
+        padding: 2px 0;
+    }
+
+    .card-unidades{
+        background-color: white;
+        padding: 15px 0;
+        transition: 0.3s ease;
+        border-radius: 5px;
+        box-shadow: 0 0 1px black;
+    }
+
+    .card-unidades:hover{
+        transform: translateY(-8px);
+        box-shadow: 0px 5px 10px rgba(0,0,0,0.15);
+    }
+    .card-unidades img{
+        border-radius: 5px;
+        box-shadow: 0 0 5px black;
+        margin-bottom: 5px;
+    }
+
+    .desc-unidades{
+        text-align: start;
+        padding: 0 10px;
+    }
+
+    #banner-agendamento{
+        background-color: #024959;
+        color: white;
+        margin: 20px 0;
+        max-height: 0;
+        transition: 0.5s ease;
+        opacity: 0.1;
+    }
+
+    #info-pessoais, #horarios{
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        border-radius: 5px;
+        padding: 30px;
+        transition: 0.5s ease;
+        opacity: 0.2;
+    }
+    #info-pessoais{
+        position: sticky !important;
+        top: 110px;
+    }
+    .calcular-imc{
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          padding: 50px;
+          height: 450px;
+          border-radius: 5px;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+          transition: 0.3s;
+        }
+
+        .calcular-imc input{
+          width: 100%;
+          margin-bottom: 5px;
+        }
+
+        .calcular-imc label{
+          margin: 0;
+          padding: 0;
+        }
+        .fechar{
+          display: none;
+        }
+        #label-obs-agua{
+          margin: 0;
+          font-size: 0.8em;
+        }
+        .form-TMB{
+          display: flex;
+          gap: 5px;
+        }
+        .form-TMB-select{
+          display: flex;
+          gap: 5px;
+          justify-content: space-between;
+        }
+        .form-TMB-select select{
+          width: 50%;
+          padding: 1px;
+          margin-bottom: 5px;
+          border: 1px solid gray;
+          color: gray;
+        }
+        header{
+          transition: 0.3s;
+          position: sticky !important;
+          top: 0;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+          z-index: 1;
+          background-color: white;
+          overflow: hidden;
+        }
+
+        #loginModal{
+          width: 100%;
+          display: flex;
+          transition: 0.5s ease;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          background-color: white;
+          max-height: 0;
+          overflow: hidden;
+        }
+        #loginModal.abrir{
+          max-height: 300px;
+          margin-bottom: 10px;
+        }
+        .formLogin{
+          gap: 10px;
+          display: flex;
+          flex-direction: column;
+          width: 300px;
+        }
+        .formLogin input, button{
+          padding: 5px;
+          border-radius: 5px;
+          border: 1px solid #a3cad3;
+        }
+        .formLogin label{
+          margin: 0;
+          padding: 0;
+        }
+        .formLogin button{
+          background-color: #024959;
+          color: white;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+        .formLogin button:hover{
+          background-color: white;
+          color: #024959;
+          border: 1px solid #024959;
+          transform: scale(1.05);
+        }
+
+        .login-link{
+          display: flex;
+          flex-direction: column;
+        }
+        .login-link p{
+          margin: 0;
+          padding: 0;
+          color: gray;
+        }
+        .unidades {
+    background-color: #f6f6f6;
+    padding: 5rem 0;
+}
+
+/* Cards das unidades */
+.unidade-card {
+    padding: 1rem;
+    border: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    height: 100%;
+}
+
+.unidade-card img {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+        .map-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%; /* 16:9 */
+    position: relative;
+    height: 0;
+    margin-bottom: 1rem;
+}
+.map-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: 0;
+}
+
+/* Formulário de contato */
+.form-contato-card {
+    padding: 2rem;
+    border: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.form-contato-card .form-label {
+    font-weight: 500;
+}
+
+.form-contato-card .form-control {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.form-contato-card .btn-primary {
+    background-color: #024959;
+    border-color: #024959;
+}
+.form-contato-card .btn-primary:hover {
+    background-color: #017180;
+    border-color: #017180;
+}
+
+        .color-custom {
+    background-color: #024959 !important;
+}
+
+
+.list-group-item.active {
+    background-color: #024959 !important;
+    border-color: #024959 !important;
+}
+
+.btn-primary {
+}
+
+.btn-info {
+    background-color: #024959 !important;
+    border-color: #024959 !important;
+}
+
+#menu_lateral_cliente{
+    position: sticky !important;
+    top: 160px;
+    opacity: 0.3;
+    transition: 0.4s ease;
+}
+
+.cinza{
+    background-color: #f8f9fa;
+}
+
+.card-especialidades{
+    box-shadow: 0 8px 10px rgba(0,0,0,0.15);
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    height: 170px;
+}
+.card-especialidades:hover{
+    transform: scale(1.05);
+}
+
+.img{
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+}
+
+#bannerAreaCliente{
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0.2;
+    transition: 0.3s ease;
+}
+
+/* Estilos para a seção de banner */
+.carousel-item {
+      height: 500px;
+    }
+
+    .img-slide {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      transform: scale(1.08);
+      transition: ease 3s;
+    }
+    .carousel-item.active .img-slide{
+        transform: scale(1);
+    }
+
+    .carousel-caption {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+    .bb{
+        width: 80%;
+        text-align: start;
+    }
+    .bb img{
+        width: 400px;
+    }
+    .bb h5{
+        font-size: 45px;
+        text-shadow: 0px 4px 5px rgba(0,0,0,0.5);
+    }
+    .bb p{
+        text-shadow: 0px 4px 5px rgba(0,0,0,0.5);
+    }
+    .caixa-dentro-banner{
+        width: 50%;
+    }
+    .caixa-dentro-banner button{
+        background-color: transparent;
+        border: 1px solid white;
+        color: white;
+        padding: 8px;
+        border-radius: 10px;
+        transition: ease 0.3s;
+    }
+    .caixa-dentro-banner button:hover{
+        color: #e6ddd2;
+        border: 1px solid #e6ddd2;
+        transform: scale(1.1);
+    }
+
+    /*MObile*/
+    @media (max-width: 768px) {
+        .caixa-dentro-banner {
+            width: 100%;
+            text-align: center;
+        }
+        .bb img{
+            display: none;
+            width: 70%;
+            height: auto;
+        }
+        body{
+            width: 100%;
+            overflow-x: hidden;
+        }
+        #padrinho img{
+            width: 100%;
+            height: auto;
+        }
+        #padrinho .imagem-2{
+            display: none;
+        }
+        .caixa2{
+            padding: 0;
+        }
+        .caixa-impacto-padrinho{
+            padding: 0;
+        }
+        .caixa-impacto-padrinho h1{
+            font-size: 20px;
+        }
+        .caixa-desc-padrinho{
+            padding: 0;
+        }
+        .fechar1{
+            display: none;
+        }
+        .espaco{
+            padding: 20px;
+        }
+        .canto{
+            width: 100%;
+        }
+        #fotoparalax{
+        }
+        .pag-padrinho-card{
+            margin: 10px auto;
+            padding: 50px;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.0);
+            border-radius: 0;
+        }
+        .sempadding{
+        }
+        .card-scq{
+            max-width: 270px;
+            padding: 15px;
+        }
+        .card-scq img{
+            width: 80%;
+        }
+        .card-scq h5{
+            font-size: 19px;
+        }
+        .card-scq p{
+            font-size: 15px;
+            height: 120px;
+        }
+        .fechar-mobile{
+            display: none;
+        }
+        .cinza h1{
+            font-size: 32px;
+        }
+    }
+    .meio{
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+    .marcar{
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+    }
+    .gap{
+        gap: 20px;
+    }
+.card-as{
+    text-align: start;
+}
+#banner-especialidade{
+    height: 300px;
+    background-image: url(../img/banner-especialidades.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    z-index: 20;
+    animation: inicio ease 1s;
+    overflow: hidden;
+}
+
+@keyframes inicio {
+    0% {
+        opacity: 0;
+        transform: translateY(-400px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+#banner1{
+    animation: suave ease 1s;
+}
+
+@keyframes suave {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.cards-especialidades{
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 10px;
+}
+
+.cards-especialidades::-webkit-scrollbar{
+    display: none;
+}
+.card-esp{
+    min-width: 240px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+
+}
+/* Estilos para a seção de padrinho */
+.imagem-1{
+            width: 550px;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+        }
+        .imagem-2{
+            position: relative;
+            top: 100px;
+            left: -50px;
+            width: 260px;
+            height: 400px;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+            object-fit: cover;
+        }
+        .titulo-padrinho{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 34px;
+            font-weight: bold;
+            color: black;
+            width: 100%;
+        }
+        .caixa-desc-padrinho {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .caixa-desc-padrinho button{
+            background-color: steelblue;
+            border: 1px solid steelblue;
+            color: white;
+            transition: ease 0.3s;
+        }
+        .caixa-desc-padrinho button:hover{
+            border: 1px solid steelblue;
+            background-color: white;
+            color: steelblue;
+        }
+        .caixa-impacto-padrinho h1{
+            font-size: 38px;
+            padding: 5px;
+            font-weight: bold;
+        }
+        .caixa-desc-padrinho p{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 16px;
+            padding: 5px;
+        }
+        .sub-padrinho{
+            width: 100%;
+            text-align: center;
+            color: black;
+        }
+        .sub-padrinho{
+            font-size: 16px;
+        }
+        .fonte{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        #padrinho{
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+            background-color: #a3cad3;
+        }
+        @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+        }
+
+        #fotoparalax{
+            background-image: url(../img/banner2.png);
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            background-attachment: fixed;
+        }
+        .azul{
+            color: steelblue;
+        }
+        .canto{
+            display: flex;
+            text-align: start;
+            justify-content: center;
+            flex-direction: column;
+            height: 100%;
+        }
+        .canto h1, .canto p{
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+        
+        .ativo{
+            color: steelblue;
+            font-weight: bold;
+        }
+        .imagens{
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        .cards-especialidade-mobile{
+            display: none;
+        }
+        .padding5{
+            padding: 5px;
+        }
+        #nada{
+            padding: 50px 0;
+        }
+        @media (max-width:768px) {
+            
+            .cards-especialidade-mobile{
+                display: flex;
+                gap: 16px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+    
+                padding: 10px;
+            }
+            .cards-especialidade-mobile::-webkit-scrollbar{
+                display: none;
+            }
+            .card-especialidade-mobile{
+                min-width: 250px;
+                max-width: 250px;
+                flex-shrink: 0;
+                scroll-snap-align: start;
+    
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            }
+            .card-especialidade-mobile h4{
+                min-height: 50px;
+            }
+            .card-especialidade-mobile p {
+                min-height: 98px;
+            }
+            .card-especialidade-mobile hr{
+                box-shadow: 0 5px 0px rgba(0, 0, 0, 0.4);
+            }
+            #nada{
+                padding: 0;
+            }
+            #ultimasessao-especialidade h3, #ultimasessao-especialidade h4{ 
+                font-size: 1.2em;
+
+            }
+            .paddingcima{
+                padding-top: 50px;
+                padding-bottom: 0;
+            }
+        }
+
+        /*pag QUem somos*/
+        #banner-Quem-Somos{
+            background-image: url(../img/banner3.png);
+            height: 300px;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: iniciobanner 1s ease;
+        }
+        @keyframes iniciobanner {
+            0%{
+                opacity: 0;
+                height: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+        #banner-Quem-Somos .bqs-titulo{
+            display: flex;
+            flex-direction: column;
+            padding: 50px;
+        }
+        #banner-Quem-Somos .bqs-titulo h1{
+            font-size: 40px;
+            color: white;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        #banner-Quem-Somos .bqs-titulo p{
+            color: white;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .quem-somos img{
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        @media (max-width: 768px) {
+            .quem-somos img{
+                width: 100%;
+            }
+        }
+
+        /*contato*/
+        .banner-contato{
+            background-image: url(../img/vet2.jpg);
+            background-position: center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+                align-items: center;
+                animation: en ease 1s;
+        }
+        @keyframes en {
+            0%{
+                opacity: 0;
+                height: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+        .contato-titulo{
+            width: 100%;
+            padding: 50px;
+            color: white;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
