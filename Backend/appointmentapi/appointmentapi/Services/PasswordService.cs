@@ -1,6 +1,7 @@
 using appointmentapi.DTOs;
 using appointmentapi.Models.PasswordEntity;
 using appointmentapi.Services.Interface;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace appointmentapi.Services
@@ -31,14 +32,14 @@ namespace appointmentapi.Services
             var qtdVazamentos = await _breachCheck.VerificarVazamentoAsync(senha);
             var comprometida = qtdVazamentos > 0;
 
-            var (score, classificacao) = ClassificarForca(entropia, comprometida, padroes.Count);
+            var (score, classificacao) = ClassificarForca(entropia, comprometida, padroes);
 
             return new PasswordAnalysisResult
             {
                 Score = score,
                 Classificacao = classificacao,
                 EntropiaBits = entropia,
-                TempoParaQuebrar = EstimarTempoQuebra(entropia, comprometida, padroes.Count),
+                TempoParaQuebrar = EstimarTempoQuebra(entropia, comprometida, padroes),
                 Comprometida = comprometida,
                 QuantidadeVazamentos = qtdVazamentos > 0 ? qtdVazamentos : 0,
                 PadroesDetectados = padroes,
@@ -59,11 +60,15 @@ namespace appointmentapi.Services
             return senha.Length * Math.Log2(espacoCaracteres);
         }
 
-        private (int score, string classificacao) ClassificarForca(double entropia, bool comprometida, int qtdPadroes)
+        private (int score, string classificacao) ClassificarForca(double entropia, bool comprometida, List<string> padroes)
         {
             if (comprometida) return (0, "Fraca (vazada)");
-            if (qtdPadroes >= 2) return (0, "Fraca (padrões previsíveis)");
-            if (qtdPadroes == 1 && entropia < 60) return (1, "Fraca (padrão previsível)");
+
+            bool temConcatenacao = padroes.Any(p => p.Contains("concatenação de nomes"));
+            if (temConcatenacao) return (1, "Fraca (baseada em nomes/palavras reais)");
+
+            if (padroes.Count >= 2) return (0, "Fraca (padrões previsíveis)");
+            if (padroes.Count == 1 && entropia < 60) return (1, "Fraca (padrão previsível)");
 
             if (entropia < 28) return (0, "Muito Fraca");
             if (entropia < 36) return (1, "Fraca");
@@ -72,9 +77,11 @@ namespace appointmentapi.Services
             return (4, "Muito Forte");
         }
 
-        private string EstimarTempoQuebra(double entropiaBits, bool comprometida, int qtdPadroes)
+        private string EstimarTempoQuebra(double entropiaBits, bool comprometida, List<string> padroes)
         {
-            if (comprometida || qtdPadroes >= 2) return "Instantâneo (padrão conhecido)";
+            bool temConcatenacao = padroes.Any(p => p.Contains("concatenação de nomes"));
+            if (comprometida || padroes.Count >= 2 || temConcatenacao)
+                return "Minutos a horas (ataque de dicionário com nomes)";
 
             const double tentativasPorSegundo = 10_000_000_000;
             double combinacoes = Math.Pow(2, entropiaBits);

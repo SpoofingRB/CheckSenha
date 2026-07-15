@@ -29,6 +29,9 @@ namespace appointmentapi.Services
             if (ContemLeetSpeakDeSenhaComum(senha, senhasComuns))
                 padroes.Add("Variação disfarçada de senha comum (ex: P@ssw0rd)");
 
+            if (ContemPalavrasConcatenadas(senha))
+                padroes.Add("Parece concatenação de nomes/palavras (ex: NomeSobrenome) — atacantes testam combinações de nomes reais, não caracteres aleatórios");
+
             return padroes;
         }
 
@@ -90,6 +93,13 @@ namespace appointmentapi.Services
                 .Replace("7", "t");
 
             return senhasComuns.Contains(normalizada);
+        }
+
+        private bool ContemPalavrasConcatenadas(string senha)
+        {
+ 
+            var matches = Regex.Matches(senha, @"[A-ZÀ-Ý][a-zà-ÿ]{2,}");
+            return matches.Count >= 2;
         }
     }
 }
