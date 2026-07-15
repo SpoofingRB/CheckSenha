@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAnalisar = document.getElementById("btnAnalisar");
     const btnMostrarSenha = document.getElementById("btnMostrarSenha");
     const inputSenha = document.getElementById("inputSenha");
+    const btnGerarSenha = document.getElementById("btnGerarSenha");
+    const btnCopiarSenha = document.getElementById("btnCopiarSenha");
 
     btnMostrarSenha.addEventListener("click", () => {
         inputSenha.type = inputSenha.type === "password" ? "text" : "password";
@@ -13,6 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
     inputSenha.addEventListener("keypress", (e) => {
         if (e.key === "Enter") analisarSenha();
     });
+
+    if (btnGerarSenha) {
+        btnGerarSenha.addEventListener("click", gerarSenhaSegura);
+    }
+
+    if (btnCopiarSenha) {
+        btnCopiarSenha.addEventListener("click", copiarSenhaGerada);
+    }
 });
 
 async function analisarSenha() {
@@ -96,5 +106,51 @@ function exibirResultado(data) {
         const li = document.createElement("li");
         li.textContent = m;
         listaMelhorias.appendChild(li);
+    });
+}
+
+function gerarSenhaSegura() {
+    const tamanho = 16;
+    const maiusculas = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+    const minusculas = "abcdefghijkmnpqrstuvwxyz";
+    const numeros = "23456789";
+    const simbolos = "!@#$%&*-_+=?";
+    const todos = maiusculas + minusculas + numeros + simbolos;
+
+    let senha = [
+        maiusculas[randomSeguro(maiusculas.length)],
+        minusculas[randomSeguro(minusculas.length)],
+        numeros[randomSeguro(numeros.length)],
+        simbolos[randomSeguro(simbolos.length)]
+    ];
+
+    for (let i = senha.length; i < tamanho; i++) {
+        senha.push(todos[randomSeguro(todos.length)]);
+    }
+
+    for (let i = senha.length - 1; i > 0; i--) {
+        const j = randomSeguro(i + 1);
+        [senha[i], senha[j]] = [senha[j], senha[i]];
+    }
+
+    const senhaFinal = senha.join("");
+    document.getElementById("senhaGerada").value = senhaFinal;
+    document.getElementById("resultadoGerador").style.display = "block";
+}
+
+function randomSeguro(max) {
+    const array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    return array[0] % max;
+}
+
+function copiarSenhaGerada() {
+    const campo = document.getElementById("senhaGerada");
+    campo.select();
+    navigator.clipboard.writeText(campo.value).then(() => {
+        const btn = document.getElementById("btnCopiarSenha");
+        const textoOriginal = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+        setTimeout(() => { btn.innerHTML = textoOriginal; }, 1500);
     });
 }
