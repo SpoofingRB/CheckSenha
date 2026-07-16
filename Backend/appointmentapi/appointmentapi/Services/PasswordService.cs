@@ -9,17 +9,26 @@ namespace appointmentapi.Services
     public class PasswordService : IPasswordService
     {
         private readonly HashSet<string> _senhasComuns;
+        private readonly HashSet<string> _nomesComuns;
+        private readonly HashSet<string> _palavrasComuns;
         private readonly PasswordPatternAnalyzer _patternAnalyzer = new();
         private readonly IBreachCheckService _breachCheck;
 
         public PasswordService(IWebHostEnvironment env, IBreachCheckService breachCheck)
         {
-            var caminho = Path.Combine(env.ContentRootPath, "Data", "senhas-comuns.txt");
-            _senhasComuns = File.Exists(caminho)
-                ? new HashSet<string>(File.ReadAllLines(caminho).Select(l => l.Trim().ToLower()))
-                : new HashSet<string>();
+            _senhasComuns = CarregarArquivo(env, "senhas-comuns.txt");
+            _nomesComuns = CarregarArquivo(env, "nomes-comuns.txt");
+            _palavrasComuns = CarregarArquivo(env, "palavras-comuns-pt.txt");
 
             _breachCheck = breachCheck;
+        }
+
+        private HashSet<string> CarregarArquivo(IWebHostEnvironment env, string nomeArquivo)
+        {
+            var caminho = Path.Combine(env.ContentRootPath, "Data", nomeArquivo);
+            return File.Exists(caminho)
+                ? new HashSet<string>(File.ReadAllLines(caminho).Select(l => l.Trim().ToLower()))
+                : new HashSet<string>();
         }
 
         public async Task<PasswordAnalysisResult> AnalisarAsync(PasswordCheckDTO dto)
@@ -27,7 +36,7 @@ namespace appointmentapi.Services
             var senha = dto.Password ?? string.Empty;
 
             var entropia = CalcularEntropia(senha);
-            var padroes = _patternAnalyzer.DetectarPadroes(senha, _senhasComuns);
+            var padroes = _patternAnalyzer.DetectarPadroes(senha, _senhasComuns, _nomesComuns, _palavrasComuns);
 
             var qtdVazamentos = await _breachCheck.VerificarVazamentoAsync(senha);
             var comprometida = qtdVazamentos > 0;
@@ -64,8 +73,12 @@ namespace appointmentapi.Services
         {
             if (comprometida) return (0, "Fraca (vazada)");
 
-            bool temConcatenacao = padroes.Any(p => p.Contains("concatenação de nomes"));
-            if (temConcatenacao) return (1, "Fraca (baseada em nomes/palavras reais)");
+            bool padraoForte = padroes.Any(p =>
+                p.Contains("concatenação de nomes") ||
+                p.Contains("Nome + Ano") ||
+                p.Contains("palavra comum do português"));
+
+            if (padraoForte) return (1, "Fraca (baseada em nomes/palavras reais)");
 
             if (padroes.Count >= 2) return (0, "Fraca (padrões previsíveis)");
             if (padroes.Count == 1 && entropia < 60) return (1, "Fraca (padrão previsível)");
@@ -79,9 +92,13 @@ namespace appointmentapi.Services
 
         private string EstimarTempoQuebra(double entropiaBits, bool comprometida, List<string> padroes)
         {
-            bool temConcatenacao = padroes.Any(p => p.Contains("concatenação de nomes"));
-            if (comprometida || padroes.Count >= 2 || temConcatenacao)
-                return "Minutos a horas (ataque de dicionário com nomes)";
+            bool padraoForte = padroes.Any(p =>
+                p.Contains("concatenação de nomes") ||
+                p.Contains("Nome + Ano") ||
+                p.Contains("palavra comum do português"));
+
+            if (comprometida || padroes.Count >= 2 || padraoForte)
+                return "Minutos a horas (ataque de dicionário)";
 
             const double tentativasPorSegundo = 10_000_000_000;
             double combinacoes = Math.Pow(2, entropiaBits);
